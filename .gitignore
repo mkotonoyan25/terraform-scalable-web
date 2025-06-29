@@ -1,0 +1,21 @@
+provider.tf
+# Terraform cache & build
+.terraform/
+.terraform.lock.hcl
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+*.tfplan
+*.tfout
+
+# Sensitive variable files
+*.tfvars
+
+# Crash logs
+crash.log
+
+# IDE settings (optional)
+.vscode/
+.idea/
+
