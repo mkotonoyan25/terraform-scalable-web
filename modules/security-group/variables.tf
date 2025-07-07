@@ -33,7 +33,7 @@ variable "my_sg_ingress" {
   }
 
 
-  variable "my-sg-egress" {
+  variable "my_sg_egress" {
   description = "Map of egress rules"
   type = map(object(
     {

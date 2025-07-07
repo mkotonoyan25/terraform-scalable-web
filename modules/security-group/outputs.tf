@@ -1,3 +1,3 @@
-output "my-sg-output" {
-    value = aws_security_group.my-sg.id 
+output "my_sg_id" {
+    value = aws_security_group.my_sg.id 
 }
