@@ -5,11 +5,6 @@ variable "resource_name" {
   default = "my-project"
 }
 
-variable "image_id" {
-  type    = string
-  default = "ami-02003f9f0fde924ea"
-}
-
 variable "instance_type" {
   type    = string
   default = "t2.micro"
@@ -20,30 +15,66 @@ variable "key_name" {
 }
 
 variable "lt_tags" {
-  type    = map(string)
+  type = map(string)
   default = {
     name = "production"
   }
-  }
+}
+
+variable "my_template_type" {
+  type    = string
+  default = "instance"
+}
+
 
 ####_____ASG___Variables
 
 variable "asg_min_size" {
-  type = number
+  type    = number
   default = 2
 }
 variable "asg_max_size" {
-  type = number
+  type    = number
   default = 5
 }
 variable "asg_desired_capacity" {
-  type = number
+  type    = number
   default = 2
+}
+
+variable "asg_health_check_type" {
+  type    = string
+  default = "ELB"
+}
+
+variable "health_check_grace_period" {
+  type    = number
+  default = "300"
+}
+
+variable "asg_launch_template_version" {
+  type    = string
+  default = "$Latest"
+}
+
+variable "asg_tag_key" {
+  type    = string
+  default = "Name"
+}
+
+variable "asg_tag_propagate_at_launch" {
+  type    = bool
+  default = true
+}
+
+variable "asg_lifecycle_create_before_destroy" {
+  type    = bool
+  default = true
 }
 
 ###___Common_Tags_____
 variable "common_tags" {
-  type        = map(string)
+  type = map(string)
 }
 
 ###___Modules___
@@ -65,7 +96,7 @@ variable "vpc_pub_subnets" {
 
 
 variable "target_group_arn" {
-  type        = string
+  type = string
 }
 
 

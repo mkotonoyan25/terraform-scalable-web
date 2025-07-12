@@ -22,7 +22,7 @@ variable "common_tags" {
 
 variable "key_name" {
   type = string
-  default = "change_to_your_key_name"
+  default = "my-key"
 }
 
  

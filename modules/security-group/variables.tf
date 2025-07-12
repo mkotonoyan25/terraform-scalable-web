@@ -9,6 +9,8 @@ variable "sg_name" {
   default = "my-sg"
 }
 
+#####_____SG-Ingress-Rulles____
+
 variable "my_sg_ingress" {
   description = "Map of security group ingress rules"
   type = map(object(
@@ -37,6 +39,12 @@ variable "my_sg_ingress" {
   }
   }
 
+  variable "my_sg_ingress_type" {
+  type = string
+  default = "ingress"
+}
+
+#####_____SG-Egress-Rulles____
 
   variable "my_sg_egress" {
   description = "Map of egress rules"
@@ -57,6 +65,11 @@ variable "my_sg_ingress" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
+}
+
+variable "my_sg_egress_type" {
+  type = string
+  default = "egress"
 }
 
 ###___Common_Tags_____

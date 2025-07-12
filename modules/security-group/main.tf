@@ -9,10 +9,11 @@ resource "aws_security_group" "my_sg" {
 }
 
 #####_____Security-Group-Ingress-Rulles____
+
 resource "aws_security_group_rule" "my_sg_ingress" {
      for_each = var.my_sg_ingress
 
-  type              = "ingress"
+  type              = var.my_sg_ingress_type
   from_port         = each.value.from_port
   to_port           = each.value.to_port
   protocol          = each.value.protocol
@@ -20,12 +21,13 @@ resource "aws_security_group_rule" "my_sg_ingress" {
   security_group_id = aws_security_group.my_sg.id
 }
 
+
 #####_____Security-Group-Egress-Rulles____
 
 resource "aws_security_group_rule" "my_sg_egress" {
   for_each = var.my_sg_egress
 
-  type              = "egress"
+  type              = var.my_sg_egress_type
   from_port         = each.value.from_port
   to_port           = each.value.to_port
   protocol          = each.value.protocol

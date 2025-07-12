@@ -3,6 +3,12 @@ variable "vpc_cidr" {
   type    = string
   default = "10.0.0.0/16"
 }
+
+variable "vpc_instance_tenancy" {
+  type = string
+  default = "default"
+}
+
 ###____Subnets______
 variable "sub_cidr" {
   type    = list(string)
@@ -13,6 +19,12 @@ variable "resource_name" {
   type = string
   default = "my-project"
 }
+
+variable "subnets_map_public_ip_on_launch" {
+  type = bool
+  default = true
+}
+
 ###__Route_Table__
 variable "rt-route" {
     type = string

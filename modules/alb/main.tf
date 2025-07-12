@@ -1,16 +1,5 @@
-
-variable "vpc_pub_subnets" {
-  type = list(string)
-}
-variable "vpc_id" {
-  type = string
-}
-
-variable "my_sg_id" {
-  type = string
-}
-
 ####---Creating___ALB____Resource
+
 resource "aws_lb" "alb" {
   name               = "${var.resource_name}-ALB"
   internal           = var.internal
@@ -19,10 +8,11 @@ resource "aws_lb" "alb" {
   subnets            = var.vpc_pub_subnets
 
   tags = var.common_tags
-  
+
 }
 
 ####---Creating___Target_Group
+
 resource "aws_lb_target_group" "app_tg" {
   name     = "${var.resource_name}-TG"
   port     = var.tg_port
@@ -30,19 +20,17 @@ resource "aws_lb_target_group" "app_tg" {
   vpc_id   = var.vpc_id
 
   health_check {
-    protocol            = var.tg_hc_protocol
-    path                = "/"
-    matcher             = "200-399"
-    interval            = 30
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
+    protocol            = var.tg_health_check.protocol
+    path                = var.tg_health_check.path
+    matcher             = var.tg_health_check.matcher
+    interval            = var.tg_health_check.internal
+    timeout             = var.tg_health_check.timeout
+    healthy_threshold   = var.tg_health_check.healthy_threshold
+    unhealthy_threshold = var.tg_health_check.unhealthy_threshold
   }
 
   tags = var.common_tags
 }
-
-
 
 ####___________ALB---Listener_____
 
@@ -52,10 +40,11 @@ resource "aws_lb_listener" "listener" {
   protocol          = var.listener_protocol
 
   default_action {
-    type             = "forward"
+    type             = var.listener_type
     target_group_arn = aws_lb_target_group.app_tg.arn
   }
 
   tags = var.common_tags
 }
+
 

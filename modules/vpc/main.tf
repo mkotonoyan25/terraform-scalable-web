@@ -1,13 +1,8 @@
-data "aws_availability_zones" "my_az" {
-  state = "available"
-}
-
-
 ####-----VPC-----------
 
 resource "aws_vpc" "vpc" {
   cidr_block       = var.vpc_cidr
-  instance_tenancy = "default"
+  instance_tenancy = var.vpc_instance_tenancy
   
   tags = var.common_tags
 }
@@ -19,9 +14,10 @@ resource "aws_subnet" "subnets" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.sub_cidr[count.index]
   availability_zone       = data.aws_availability_zones.my_az.names[count.index]
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = var.subnets_map_public_ip_on_launch
   tags = var.common_tags
 }
+
 
 #######---IGW----------
 
