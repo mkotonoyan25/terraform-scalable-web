@@ -1,7 +1,6 @@
 module "vpc" {
   source       = "../../modules/vpc"
   common_tags  = var.common_tags
-  # other vars...
 }
 
 module "security_group" {
