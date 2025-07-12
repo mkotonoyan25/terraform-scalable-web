@@ -1,12 +1,10 @@
-module "vpc" {
-    source = "/home/tonoyan/terraform/test/my-project/modules/vpc"
-}
 
 ####______Security-Group________
 
 resource "aws_security_group" "my_sg" {
-  name        = "${var.resource_name}-SG"
+  name        = var.sg_name
   vpc_id      = var.vpc_id
+  tags = var.common_tags
 
 }
 

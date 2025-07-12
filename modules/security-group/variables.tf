@@ -1,7 +1,12 @@
-
-variable "resource_name" {
+##__VPC_MODULE
+variable "vpc_id" {
+  description = "VPC ID to attach the security group to"
+  type        = string
+}
+###___SG___
+variable "sg_name" {
   type = string
-  default = "my-project"
+  default = "my-sg"
 }
 
 variable "my_sg_ingress" {
@@ -54,9 +59,9 @@ variable "my_sg_ingress" {
   }
 }
 
-variable "vpc_id" {
-  type = string
-  default = "module.vpc.vpc-id"
+###___Common_Tags_____
+variable "common_tags" {
+  type        = map(string)
 }
 
 

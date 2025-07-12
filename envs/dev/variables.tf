@@ -10,4 +10,19 @@ variable "aws_secret_key" {
   sensitive   = true
 }
 
+variable "common_tags" {
+  description = "Common tags for all resources"
+  type        = map(string)
+  default = {
+    Environment = "prod"
+    Project     = "scalable-web"
+    Owner       = "tonoyan"
+  }
+}
+
+variable "key_name" {
+  type = string
+  default = "change_to_your_key_name"
+}
+
  

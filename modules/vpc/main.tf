@@ -8,10 +8,8 @@ data "aws_availability_zones" "my_az" {
 resource "aws_vpc" "vpc" {
   cidr_block       = var.vpc_cidr
   instance_tenancy = "default"
-
-  tags = {
-    Name = "${var.resource_name}-vpc"
-  }
+  
+  tags = var.common_tags
 }
 
 #####--------SUBNETS-------------
@@ -22,9 +20,7 @@ resource "aws_subnet" "subnets" {
   cidr_block              = var.sub_cidr[count.index]
   availability_zone       = data.aws_availability_zones.my_az.names[count.index]
   map_public_ip_on_launch = true
-  tags = {
-    Name = "${var.resource_name}-subnet"
-  }
+  tags = var.common_tags
 }
 
 #######---IGW----------
@@ -32,9 +28,7 @@ resource "aws_subnet" "subnets" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
-  tags = {
-    Name = "${var.resource_name}-igw"
-  }
+  tags = var.common_tags
 }
 
 #####-----ROUTE___TABLE-------
@@ -47,11 +41,8 @@ resource "aws_route_table" "my-rt" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
-  tags = {
-    Name = "${var.resource_name}-rt"
-  }
+  tags = var.common_tags
 }
-
 
 ##########--ROUTE--TABLE--ASSOCIATION
 
@@ -61,6 +52,3 @@ resource "aws_route_table_association" "rt-association" {
   route_table_id = aws_route_table.my-rt.id
 }
 
-# output "subnets" {
-#     value = aws_subnet.subnets[*].cidr_block
-# }
