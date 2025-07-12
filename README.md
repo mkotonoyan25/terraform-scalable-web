@@ -8,7 +8,7 @@ This project builds a production-ready web hosting infrastructure on AWS using T
 
 You will build a fully functional and production-like web hosting infrastructure on AWS using Terraform:
 
-- A custom VPC with two public subnets (across 2 AZs)
+- A custom VPC with public subnets (in different AZ's)
 - 
 - A public Application Load Balancer (ALB)
 - 
@@ -51,9 +51,7 @@ You can change the default values or use them as-is
 
 
 - In envs/dev/, create a file named terraform.tfvars (if it doesn’t exist)
-- 
 - Or directly edit envs/dev/variables.tf
-- 
 - Add your AWS access key and secret key:
 
 access_key = "YOUR_AWS_ACCESS_KEY"
@@ -95,4 +93,5 @@ terraform apply    # Provisions the infrastructure
 
 3. S3 bucket for state storage
 
+4. Existing Key Pair
 
